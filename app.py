@@ -2,8 +2,8 @@ from logging import exception
 from pprint import pprint
 from flask import Flask,render_template, request, url_for, redirect, jsonify
 from flask_mysqldb import MySQL
-from bookstore.config import config, TOKEN
-from bookstore import myDarling as md
+from package.library.config import config, TOKEN
+from package.library import utilities as utl
 import telebot
 
 bot = telebot.TeleBot(TOKEN)
@@ -26,7 +26,7 @@ def send_help(message):
 @bot.message_handler(commands=['hora'])
 def send_hora(message):
     # Fecha
-    now = md.get_now()
+    now = utl.get_now()
     bot.reply_to(message, now)
 
 @bot.message_handler(func=lambda message: True)
